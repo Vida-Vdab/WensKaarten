@@ -24,7 +24,7 @@ namespace Wenskaarten
     /// </summary>
     public partial class MainWindow : Window
     {
-        public int aantalballen;
+        //public int aantalballen;
         public MainWindow()
         {
             InitializeComponent();
@@ -40,7 +40,6 @@ namespace Wenskaarten
             comboBoxKleuren.SelectedIndex = 0;
             LettertypeComboBox.SelectedIndex = 0;
             LabelTekst.Content = "10";
-            aantalballen = 0;
             StatusItem.Content = "Nieuw";
             Kaart1.IsChecked = false;
             Kaart2.IsChecked = false;
@@ -122,7 +121,6 @@ namespace Wenskaarten
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                //sleepcirkel = (Ellipse)sender;
                 Ellipse gesleepteEllipse = (Ellipse)e.OriginalSource;
                 DataObject sleepBal = new DataObject("sleepBal", gesleepteEllipse);
                 DragDrop.DoDragDrop(gesleepteEllipse, sleepBal, DragDropEffects.Move);
@@ -141,7 +139,6 @@ namespace Wenskaarten
                 Canvas.SetLeft(nieuweBal, positie.X - 20);
                 Canvas.SetTop(nieuweBal, positie.Y - 20);
                 balCanvas.Children.Add(nieuweBal);
-                aantalballen++;
 
                 if(gesleepteEllipse.Parent != null)
                 {
@@ -156,7 +153,6 @@ namespace Wenskaarten
             {
                 Ellipse gesleepteEllipse = (Ellipse)e.Data.GetData("sleepBal");
                 balCanvas.Children.Remove(gesleepteEllipse);
-                aantalballen--;
             }
         }
         private void OpenExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -172,6 +168,7 @@ namespace Wenskaarten
                 {
                     using (StreamReader bestand = new StreamReader(dlg.FileName))
                     {
+                        balCanvas.Children.Clear();
                         int aantalballen = int.Parse(bestand.ReadLine());
                         for (int i = 0; i < aantalballen; i++)
                         {
@@ -236,6 +233,7 @@ namespace Wenskaarten
                         bestand.WriteLine(LabelTekst.Content.ToString());
                     }
                     StatusItem.Content = dlg.FileName;
+                    New();
                 }
             }
             catch (Exception ex)
