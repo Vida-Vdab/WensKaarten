@@ -34,15 +34,15 @@
 
         <StackPanel Orientation="Horizontal">
             <StackPanel Orientation="Vertical" Margin="20,0,0,10">
-                <Canvas Name="balCanvas" Height="400" Width="500" AllowDrop="True" Drop="Ellipse_Drop" MouseMove="Ellipse_MouseMove"></Canvas>
+                <Canvas Name="balCanvas" Height="400" Width="500" AllowDrop="True" Drop="Ellipse_Drop" MouseDown="Ellipse_MouseMove"></Canvas>
                 <TextBox Name="TekstTextBox" MinWidth="100" MaxWidth="500" Height="45" TextAlignment="Center" VerticalAlignment="Center"
                          FontFamily="{Binding ElementName=LettertypeComboBox, Path=SelectedValue}" TextWrapping="Wrap"
                          FontSize="{Binding ElementName=LabelTekst, Path=Content, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Vertical" Width="220">
                 <TextBlock Text="Kleur van de bal" HorizontalAlignment="Center" FontSize="15"></TextBlock>
-                <ComboBox Name="comboBoxKleuren" Margin="30,5" SelectedIndex="0" SelectionChanged="comboBoxKleuren_SelectionChanged" ></ComboBox>
-                <Ellipse Name="gekozenBal" MouseMove="Ellipse_MouseMove"></Ellipse>
+                <ComboBox Name="comboBoxKleuren" Margin="30,5"></ComboBox>
+                <Ellipse Name="gekozenBal" Fill="{Binding ElementName=comboBoxKleuren, Path=SelectedValue}" MouseMove="Ellipse_MouseMove"></Ellipse>
                 <Line Margin="0,30"></Line>
                 <Image Source="images/vuilnisbak.png" Width="130" Height="120" AllowDrop="True" Drop="EllipseVanCanvas_Drop"></Image>
                 <Line Margin="0,30"></Line>

@@ -29,6 +29,7 @@ namespace Wenskaarten
         {
             InitializeComponent();
             New();
+          
         }
 
         private void New()
@@ -37,7 +38,6 @@ namespace Wenskaarten
             balCanvas.Background = null;
             TekstTextBox.Text = "";
             comboBoxKleuren.SelectedIndex = 0;
-            gekozenBal.Fill = null;
             LettertypeComboBox.SelectedIndex = 0;
             LabelTekst.Content = "10";
             aantalballen = 0;
@@ -93,14 +93,10 @@ namespace Wenskaarten
             foreach (PropertyInfo info in typeof(Colors).GetProperties())
             {
                 comboBoxKleuren.Items.Add(info.Name);
+
             }
         }
-        private void comboBoxKleuren_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            gekozenBal.Fill = (SolidColorBrush)new BrushConverter().ConvertFromString(comboBoxKleuren.SelectedItem.ToString());
-
-        }
+        
         private void Kaart_Click(object sender, RoutedEventArgs e)
         {
             ImageBrush img = new ImageBrush();
@@ -146,6 +142,11 @@ namespace Wenskaarten
                 Canvas.SetTop(nieuweBal, positie.Y - 20);
                 balCanvas.Children.Add(nieuweBal);
                 aantalballen++;
+
+                if(gesleepteEllipse.Parent != null)
+                {
+                    balCanvas.Children.Remove(gesleepteEllipse);
+                }
             }
         }
 
