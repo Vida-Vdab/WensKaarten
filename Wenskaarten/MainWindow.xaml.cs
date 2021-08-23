@@ -115,6 +115,7 @@ namespace Wenskaarten
                 Kaart1.IsChecked = false;
                 SaveEnAfdruk(true);
             }
+            balCanvas.Children.Clear();
         }
 
         private void Ellipse_MouseMove(object sender, MouseEventArgs e)
